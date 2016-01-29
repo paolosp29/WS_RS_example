@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pe.com.strategies.dao.db.mapper.CursoMapper">
+    
+    <!-- To call stored procedure.
+    <select id="getDetailSimpleByPhone" statementType="CALLABLE" parameterType="java.util.Map">
+       
+       { call WEBSALES.SPI_GET_SIMPLE_DET_BY_PHONE(
+			#{dnNum, mode=IN, jdbcType=VARCHAR},
+			#{simpleByPhone.coId, mode=OUT, javaType=Long, jdbcType=NUMERIC},
+			#{simpleByPhone.coStatus, mode=OUT, jdbcType=VARCHAR},
+			#{simpleByPhone.bscsCustcode, mode=OUT, jdbcType=VARCHAR},
+			#{simpleByPhone.bscsCustcodeRaiz, mode=OUT, jdbcType=VARCHAR},
+			#{simpleByPhone.planTarifarioId, mode=OUT, javaType=Long, jdbcType=INTEGER},
+			#{simpleByPhone.planDes, mode=OUT, jdbcType=VARCHAR},
+			#{simpleByPhone.productId, mode=OUT, javaType=Long, jdbcType=INTEGER},
+			#{simpleByPhone.productModel, mode=OUT, jdbcType=VARCHAR},
+			#{simpleByPhone.equipment, mode=OUT, jdbcType=VARCHAR},
+			#{simpleByPhone.hansetWithWarranty, mode=OUT, jdbcType=VARCHAR},
+			#{simpleByPhone.hansetNumOcurrence, mode=OUT, javaType=Long, jdbcType=INTEGER},
+			#{simpleByPhone.ssaaContratado, mode=OUT, jdbcType=VARCHAR},
+			#{simpleByPhone.solutionId, mode=OUT, javaType=Long, jdbcType=INTEGER},
+			#{errorMsg, mode=OUT, jdbcType=VARCHAR}
+		)}
+    </select>-->
+    
+    <select id="getPassword" statementType="CALLABLE" parameterType="java.util.Map" resultType="java.util.Map">
+       SELECT SF_DESENCRIPTA(PASSWORD) AS clave  FROM USUARIO WHERE USUARIO =#{codigo}
+    </select>
+    
+    <select id="getStatusLogeo" statementType="CALLABLE" parameterType="java.util.Map" resultType="java.util.Map">
+    declare
+    begin
+        #{STATUS,jdbcType=VARCHAR,mode=OUT} := UP100.PKG_APP_MOVIL.SF_APP_LOGUEO(#{codigo},#{pass});
+    end;
+    </select>
+    
+</mapper>
